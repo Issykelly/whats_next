@@ -40,13 +40,13 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(NAME_COL, "example event");
         values.put(DATE_COL, "2025-11-21");
-        values.put(COLOUR_COL, "#A188A6");
+        values.put(COLOUR_COL, "-6190938");
         values.put(FUTURE_COL, 1);
 
         ContentValues values2 = new ContentValues();
         values2.put(NAME_COL, "example event2");
         values2.put(DATE_COL, "2023-11-21");
-        values2.put(COLOUR_COL, "#A188A6");
+        values2.put(COLOUR_COL, "-6190938");
         values2.put(FUTURE_COL, 0);
 
         db.insert(TABLE_NAME, null, values);
@@ -55,24 +55,31 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<String[][]> onLoad(){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        db.execSQL(dropTableQuery);
-        onCreate(db);
+        //String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        //db.execSQL(dropTableQuery);
+        //onCreate(db);
+        // this has been commented out - i use it if i want to reset the database!
 
         Cursor cursorEvents =
                 db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + FUTURE_COL + " = 1 ORDER BY " + DATE_COL + " DESC", null);
+        // this line grabs all data from the table
 
         int rowCount = cursorEvents.getCount();
+        // how many enteries in the table?
         int columnCount = 4;
+        // hardcoded as I know how many fields there are
 
-        // Create a 2D array to store the results
+
+        // Create a 2D array to store the results for events in the future
         String[][] eventsListF = new String[rowCount][columnCount];
 
         int rowIndex = 0;
         if (cursorEvents.moveToFirst()) {
             do {
-                eventsListF[rowIndex][0] = cursorEvents.getString(1); // First column
-                eventsListF[rowIndex][1] = cursorEvents.getString(2); // Second column
+                eventsListF[rowIndex][0] = cursorEvents.getString(1); // event name
+                eventsListF[rowIndex][1] = cursorEvents.getString(2); // event date
+                eventsListF[rowIndex][2] = cursorEvents.getString(3); // event colour
+                eventsListF[rowIndex][3] = cursorEvents.getString(0); // event colour
                 rowIndex++;
             } while (cursorEvents.moveToNext());
             // moving our cursor to next.
@@ -82,13 +89,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + FUTURE_COL + " = 0 ORDER BY " + DATE_COL + " DESC", null);
         rowCount = cursorEvents.getCount();
 
-        // Create a 2D array to store the results
+        // Create a 2D array to store the results for past events
         String[][] eventsListP = new String[rowCount][columnCount];
         rowIndex = 0;
         if (cursorEvents.moveToFirst()) {
             do {
-                eventsListP[rowIndex][0] = cursorEvents.getString(1); // First column
-                eventsListP[rowIndex][1] = cursorEvents.getString(2); // Second column
+                eventsListP[rowIndex][0] = cursorEvents.getString(1); // event name
+                eventsListP[rowIndex][1] = cursorEvents.getString(2); // event date
+                eventsListP[rowIndex][2] = cursorEvents.getString(3); // event colour
                 rowIndex++;
             } while (cursorEvents.moveToNext());
             // moving our cursor to next.
@@ -102,13 +110,14 @@ public class DBHandler extends SQLiteOpenHelper {
         return arrays;
     }
 
-    public void addNewEvent(String eventName, String eventDate, String eventColour) {
+    public void addNewEvent(String eventName, String eventDate, String eventColour, int inFuture) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(NAME_COL, eventName);
         values.put(DATE_COL, eventDate);
         values.put(COLOUR_COL, eventColour);
+        values.put(FUTURE_COL, inFuture);
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -117,10 +126,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this will run if i add a new column to the table to
-        // avoid any errors! this will remove the whole table, so we
-        // want to avoid changing the table after release
-        // or we want to change this code to merely edit the data
-        // not remove it!
+        // avoid any errors!
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }

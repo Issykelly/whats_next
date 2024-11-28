@@ -1,10 +1,12 @@
 package com.example.whatsnext;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,9 +37,20 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
     public void onBindViewHolder(@NonNull CountdownViewHolder holder, int position) {
         CountdownModel countdownModel = countdownModelList.get(position);
 
-        // Set event name and date
-        holder.tvEventName.setText(countdownModel.getEventName());
-        holder.tvEventDate.setText(countdownModel.getEventDate());
+        // Set event name and date and colour
+        holder.Background.setBackgroundColor(countdownModel.getEventColour());
+        holder.EventName.setText(countdownModel.getEventName());
+        holder.EventDate.setText(countdownModel.getEventDate());
+
+        int eventColor = countdownModel.getEventColour();
+        Log.e("345", "Event color (int): " + eventColor);
+        Log.e("345", "Event color (hex): #" + Integer.toHexString(eventColor));
+
+        if (holder.Background.getBackground() instanceof ColorDrawable) {
+            int backgroundColor = ((ColorDrawable) holder.Background.getBackground()).getColor();
+            Log.e("345", "Background color (int): " + backgroundColor);
+            Log.e("345", "Background color (hex): #" + Integer.toHexString(backgroundColor));
+        }
 
         // Set up the countdown timer
         try {
@@ -59,22 +72,22 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
 
                     // Update the model and the UI
                     countdownModel.setCountdown(result);
-                    holder.tvEventCountdown.setText(result[0]);
-                    holder.tvEventCountdownLabel.setText(result[1]);
+                    holder.EventCountdown.setText(result[0]);
+                    holder.EventCountdownLabel.setText(result[1]);
                 }
 
                 @Override
                 public void onCountdownFinish() {
                     // When countdown finishes, set the result to finished
                     countdownModel.setCountdown(new String[]{"Event Finished", " "});
-                    holder.tvEventCountdown.setText("Event Finished");
-                    holder.tvEventCountdownLabel.setText("Finished");
+                    holder.EventCountdown.setText("Event Finished");
+                    holder.EventCountdownLabel.setText("Finished");
                 }
             });
         } catch (ParseException e) {
             e.printStackTrace();
-            holder.tvEventCountdown.setText("Error");
-            holder.tvEventCountdownLabel.setText("Invalid Date");
+            holder.EventCountdown.setText("Error");
+            holder.EventCountdownLabel.setText("Invalid Date");
         }
     }
 
@@ -87,16 +100,18 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
     // ViewHolder class
     public static class CountdownViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvEventName, tvEventDate, tvEventCountdown, tvEventCountdownLabel;
+        TextView EventName, EventDate, EventCountdown, EventCountdownLabel;
+        RelativeLayout Background;
 
         public CountdownViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Bind views from the row layout
-            tvEventName = itemView.findViewById(R.id.eventName);
-            tvEventDate = itemView.findViewById(R.id.date);
-            tvEventCountdown = itemView.findViewById(R.id.countdown);
-            tvEventCountdownLabel = itemView.findViewById(R.id.countdownLabel);
+            EventName = itemView.findViewById(R.id.eventName);
+            Background = itemView.findViewById(R.id.background);
+            EventDate = itemView.findViewById(R.id.date);
+            EventCountdown = itemView.findViewById(R.id.countdown);
+            EventCountdownLabel = itemView.findViewById(R.id.countdownLabel);
         }
     }
 }

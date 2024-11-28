@@ -1,9 +1,11 @@
 package com.example.whatsnext;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,12 +25,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView futureRecyclerView;
     List<CountdownModel> countdownModelListF = new ArrayList<>();
     List<CountdownModel> countdownModelListP = new ArrayList<>();
-
-    String[][] events = {
-            {"Event1", "2024-11-21"},
-            {"Event2", "2024-12-01"},
-            {"Event3", "2025-01-15"}
-    };
 
     CountdownAdapter countdownAdapter;
 
@@ -73,13 +69,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button addButton = findViewById(R.id.addButton);
+        // Set an OnClickListener on the button
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the addEvent activity
+                Intent intent = new Intent(MainActivity.this, addEvent.class);
+                startActivity(intent);
+            }
+        });
+
         TextView futureText = findViewById(R.id.futureEventText);
         String futureString = "<u>future events V</u>";
         futureText.setText(Html.fromHtml(futureString));
         futureText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pastRecyclerView.getVisibility() == View.VISIBLE){
+                if (futureRecyclerView.getVisibility() == View.VISIBLE){
                     String futureString = "<u>future events Λ</u>";
                     futureText.setText(Html.fromHtml(futureString));
                     futureRecyclerView.setVisibility(View.GONE);
@@ -104,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         for (String[] event : events) {
-            CountdownModel countdownModel = new CountdownModel(event[0], event[1]);
+            CountdownModel countdownModel = new CountdownModel(event[0], event[1], event[2]);
             countdownModelList.add(countdownModel);
         }
 
