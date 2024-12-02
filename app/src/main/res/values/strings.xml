@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">whats next</string>
+    <string-array name="icon_array">
+        <item>question</item>
+        <item>mirrorball</item>
+        <item>graduation_cap</item>
+    </string-array>
 </resources>

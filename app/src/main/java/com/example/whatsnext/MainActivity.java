@@ -111,13 +111,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         for (String[] event : events) {
-            CountdownModel countdownModel = new CountdownModel(event[0], event[1], event[2]);
+            CountdownModel countdownModel = new CountdownModel(event[3], event[0], event[1], event[2], event[4]);
+            Log.e("kms", event[4]);
             countdownModelList.add(countdownModel);
         }
 
-        countdownAdapter = new CountdownAdapter(countdownModelList);
+        countdownAdapter = new CountdownAdapter(countdownModelList, position -> {
+            CountdownModel selectedModel = countdownModelList.get(position);
+            Intent intent = new Intent(MainActivity.this, addEvent.class);
+            intent.putExtra("countdownModel", selectedModel);
+            startActivity(intent);
+        });
         recyclerView.setAdapter(countdownAdapter);
+        };
     }
-
-
-}

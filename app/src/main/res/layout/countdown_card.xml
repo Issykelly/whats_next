@@ -10,6 +10,7 @@
         android:padding="2dp">
 
         <RelativeLayout
+            android:id="@+id/eventIcon"
             android:layout_width="50dp"
             android:layout_height="55dp"
             android:background="@android:color/transparent">

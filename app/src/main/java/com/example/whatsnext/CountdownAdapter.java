@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,9 +21,15 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
 
     private List<CountdownModel> countdownModelList;
     private Context context;
+    private OnItemClickListener listener;
 
-    public CountdownAdapter(List<CountdownModel> countdownModelList) {
+    public CountdownAdapter(List<CountdownModel> countdownModelList, OnItemClickListener listener) {
         this.countdownModelList = countdownModelList;
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
     @NonNull
@@ -42,15 +50,27 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
         holder.EventName.setText(countdownModel.getEventName());
         holder.EventDate.setText(countdownModel.getEventDate());
 
-        int eventColor = countdownModel.getEventColour();
-        Log.e("345", "Event color (int): " + eventColor);
-        Log.e("345", "Event color (hex): #" + Integer.toHexString(eventColor));
 
-        if (holder.Background.getBackground() instanceof ColorDrawable) {
-            int backgroundColor = ((ColorDrawable) holder.Background.getBackground()).getColor();
-            Log.e("345", "Background color (int): " + backgroundColor);
-            Log.e("345", "Background color (hex): #" + Integer.toHexString(backgroundColor));
-        }
+        // create a new ImageView within each recylcer view element
+        // or countdown.
+        ImageView imageView = new ImageView(context);
+        imageView.setId(View.generateViewId());
+        // get the image name from the countDown model object currently
+        // being rendered
+        String imageName = countdownModel.getEventImage();
+        // add to the image to the imageview
+        int resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+        imageView.setImageResource(resourceId);
+
+        // add xml layout
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        // add to recycler view!
+        imageView.setLayoutParams(params);
+        holder.EventIcons.addView(imageView);
 
         // Set up the countdown timer
         try {
@@ -89,6 +109,8 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
             holder.EventCountdown.setText("Error");
             holder.EventCountdownLabel.setText("Invalid Date");
         }
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(holder.getAdapterPosition()));
     }
 
 
@@ -101,7 +123,7 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
     public static class CountdownViewHolder extends RecyclerView.ViewHolder {
 
         TextView EventName, EventDate, EventCountdown, EventCountdownLabel;
-        RelativeLayout Background;
+        RelativeLayout Background, EventIcons;
 
         public CountdownViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -112,6 +134,7 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
             EventDate = itemView.findViewById(R.id.date);
             EventCountdown = itemView.findViewById(R.id.countdown);
             EventCountdownLabel = itemView.findViewById(R.id.countdownLabel);
+            EventIcons = itemView.findViewById(R.id.eventIcon);
         }
     }
 }

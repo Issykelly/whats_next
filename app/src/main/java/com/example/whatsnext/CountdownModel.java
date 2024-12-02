@@ -8,19 +8,23 @@ import java.io.Serializable;
 public class CountdownModel implements Serializable {
 
     private String[] countdown;  // Hold the countdown value
-    private String eventName;
-    private String eventDate;
     private int eventColour;
+    private String eventNo, eventImage, eventDate, eventName;
 
     // Constructor
-    public CountdownModel(String eventName, String eventDate, String eventColour) {
+    public CountdownModel(String eventNo, String eventName, String eventDate, String eventColour, String eventImage) {
+        this.eventNo = eventNo;
         this.eventName = eventName;
         this.eventDate = eventDate;
+        this.eventImage = eventImage;
         this.eventColour = Integer.valueOf(eventColour);
         this.countdown = new String[]{"0", "seconds"}; // Default value
     }
 
     // Getter methods
+    public String getEventNumber() {
+        return eventNo;
+    }
     public String getEventName() {
         return eventName;
     }
@@ -30,6 +34,10 @@ public class CountdownModel implements Serializable {
     }
     public int getEventColour() {
         return eventColour;
+    }
+
+    public String getEventImage(){
+        return eventImage;
     }
 
     public String[] getCountdown() {
