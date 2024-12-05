@@ -1,8 +1,7 @@
-package com.example.whatsnext;
+package com.example.whatsnext.countdownHandling;
 
 import android.icu.text.SimpleDateFormat;
 import android.os.CountDownTimer;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.util.Date;

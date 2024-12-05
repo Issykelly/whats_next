@@ -1,9 +1,8 @@
-package com.example.whatsnext;
+package com.example.whatsnext.countdownHandling;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.whatsnext.database.DBHandler;
+import com.example.whatsnext.MainActivity;
+import com.example.whatsnext.R;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -111,6 +114,7 @@ public class addEvent extends AppCompatActivity {
             public void onClick(View v) {
                 // to allow us to check the date is in the right format
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setLenient(false);
 
                 //get the name & date from the user
                 String name = String.valueOf(EventName.getText());
@@ -152,7 +156,7 @@ public class addEvent extends AppCompatActivity {
                         // if the Date is wrong, show the error message
                         // and update it as neccessary
                         Error.setVisibility(View.VISIBLE);
-                        Error.setText("Invalid date format. Please use yyyy-MM-dd");
+                        Error.setText("Invalid date format. Please use YYYY-MM-DD");
                     }
                 }
             }

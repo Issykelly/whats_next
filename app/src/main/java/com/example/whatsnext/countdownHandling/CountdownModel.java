@@ -1,7 +1,4 @@
-package com.example.whatsnext;
-
-import android.graphics.Color;
-import android.util.Log;
+package com.example.whatsnext.countdownHandling;
 
 import java.io.Serializable;
 

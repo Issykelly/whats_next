@@ -17,6 +17,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whatsnext.countdownHandling.CountdownAdapter;
+import com.example.whatsnext.countdownHandling.CountdownModel;
+import com.example.whatsnext.countdownHandling.addEvent;
+import com.example.whatsnext.database.DBHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DBHandler db = new DBHandler(this);
-        Log.d("DBHandler", "Data Loading...");
-        ArrayList<String[][]> events = db.onLoad();
-        Log.d("DBHandler", "Data Loaded");
+        ArrayList<String[][]> events = db.onLoadEvents();
         String [][] futureEvents = events.get(0);
         String [][] pastEvents = events.get(1);
 
@@ -76,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Create an Intent to start the addEvent activity
                 Intent intent = new Intent(MainActivity.this, addEvent.class);
+                startActivity(intent);
+            }
+        });
+
+        Button habitsButton = findViewById(R.id.habitsButton);
+        habitsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the addEvent activity
+                Intent intent = new Intent(MainActivity.this, MainActivityHabits.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
             }
         });

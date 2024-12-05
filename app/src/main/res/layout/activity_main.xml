@@ -47,7 +47,7 @@
         app:strokeWidth="1dp" />
 
     <!-- ScrollView for Content -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="408dp"
         android:layout_height="700dp"
@@ -78,7 +78,8 @@
                 android:id="@+id/pastView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone" >
+                android:visibility="gone"
+                android:nestedScrollingEnabled="false">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -95,9 +96,10 @@
                 android:id="@+id/futureView"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/addButton"

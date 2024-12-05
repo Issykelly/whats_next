@@ -1,4 +1,4 @@
-package com.example.whatsnext;
+package com.example.whatsnext.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -59,19 +59,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, values);
         db.insert(TABLE_NAME, null, values2);
     }
-    public ArrayList<String[][]> onLoad(){
+    public ArrayList<String[][]> onLoadEvents(){
+        //String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        //db.execSQL(dropTableQuery);
+        //onCreate(db);
+        // this has been commented out - i use it if i want to reset the database!
+
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             //check if the event has passed
             checkFutureEventsPast();
         } catch (ParseException e) {
             //shouldn't pass an error as data is checked before adding
+            //however this try catch statement is required
         }
-
-        //String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        //db.execSQL(dropTableQuery);
-        //onCreate(db);
-        // this has been commented out - i use it if i want to reset the database!
 
         Cursor cursorEvents =
                 db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + FUTURE_COL + " = 1 ORDER BY " + DATE_COL + " ASC", null);

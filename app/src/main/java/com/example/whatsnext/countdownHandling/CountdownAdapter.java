@@ -1,18 +1,18 @@
-package com.example.whatsnext;
+package com.example.whatsnext.countdownHandling;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.whatsnext.R;
 
 import java.text.ParseException;
 import java.util.List;
