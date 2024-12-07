@@ -126,11 +126,13 @@ public class MainActivity extends AppCompatActivity {
 
         for (String[] event : events) {
             CountdownModel countdownModel = new CountdownModel(event[3], event[0], event[1], event[2], event[4]);
-            Log.e("kms", event[4]);
             countdownModelList.add(countdownModel);
         }
 
         countdownAdapter = new CountdownAdapter(countdownModelList, position -> {
+            // this code is creating an onClickListener method for recycler view
+            //where you grab which event is being clicked, and send its infomation
+            // into add events
             CountdownModel selectedModel = countdownModelList.get(position);
             Intent intent = new Intent(MainActivity.this, addEvent.class);
             intent.putExtra("countdownModel", selectedModel);

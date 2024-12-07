@@ -78,7 +78,7 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
                 @Override
                 public void onCountdownUpdate(long days, long hours, long minutes, long seconds) {
                     // Create the countdown array with updated values
-                    Log.e("123", String.valueOf(days) + " " + String.valueOf(hours) + " "+ String.valueOf(minutes) + " " + String.valueOf(seconds));
+                    //Log.e("123", String.valueOf(days) + " " + String.valueOf(hours) + " "+ String.valueOf(minutes) + " " + String.valueOf(seconds));
                     String[] result = {"0", "seconds"};
                     if (days > 0){
                         result = new String[]{String.valueOf(days + 1), "days"};

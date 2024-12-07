@@ -51,6 +51,11 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitsView
         return habitModelList.size();
     }
 
+    public void clearData() {
+        habitModelList.clear(); // Clear the dataset in the adapter
+        notifyDataSetChanged(); // Notify the RecyclerView to refresh
+    }
+
     public static class HabitsViewHolder extends RecyclerView.ViewHolder {
         TextView name, description, progress, units;
         RelativeLayout Background, EventIcons;

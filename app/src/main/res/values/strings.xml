@@ -5,4 +5,10 @@
         <item>mirrorball</item>
         <item>graduation_cap</item>
     </string-array>
+    <string-array name="freq_array">
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
+        <item>once</item>
+    </string-array>
 </resources>

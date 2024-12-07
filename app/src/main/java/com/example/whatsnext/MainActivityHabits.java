@@ -3,6 +3,7 @@ package com.example.whatsnext;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,8 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsnext.countdownHandling.addEvent;
+import com.example.whatsnext.database.DBHandler;
 import com.example.whatsnext.habitsHandling.HabitsAdapter;
 import com.example.whatsnext.habitsHandling.HabitsModel;
+import com.example.whatsnext.habitsHandling.addHabit;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -30,24 +33,17 @@ import java.util.List;
 
 public class MainActivityHabits extends AppCompatActivity {
 
-    Date currentlyShowing, today;
+    Date currentlyShowing;
+    Date today;
     ChipGroup chipGroup;
     TextView currentDateText;
     RecyclerView recyclerView;
     int previousSelectedChip;
     boolean isUserInteracting = false;
     List<HabitsModel> habitModelList = new ArrayList<>();
+    String[][] habits;
 
     HabitsAdapter HabitsAdapter;
-
-    String[][] habits = {
-            {"Morning Jog", "Start your day with a refreshing jog to stay fit.", "1", "jogs", "0"},
-            {"Read Books", "Expand your knowledge by reading daily.", "20", "pages", "0"},
-            {"Drink Water", "Stay hydrated by drinking sufficient water.", "8", "glasses", "0"},
-            {"Meditate", "Relax and focus with daily meditation sessions.", "10", "minutes", "0"},
-            {"Learn a New Skill", "Spend time improving or learning a new skill.", "30", "minutes", "0"},
-            {"Declutter Space", "Tidy up your surroundings for better productivity.", "1", "areas", "0"}
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +62,11 @@ public class MainActivityHabits extends AppCompatActivity {
         TextView nextButton = findViewById(R.id.next);
 
         today = new Date();
+
+        recyclerView = findViewById(R.id.habitsView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         update(today);
 
         previousButton.setOnClickListener(new View.OnClickListener(){
@@ -92,6 +93,17 @@ public class MainActivityHabits extends AppCompatActivity {
             }
         });
 
+        Button addButton = findViewById(R.id.addButton);
+        // Set an OnClickListener on the button
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the addEvent activity
+                Intent intent = new Intent(MainActivityHabits.this, addHabit.class);
+                startActivity(intent);
+            }
+        });
+
         Button eventsButton = findViewById(R.id.eventsButton);
         eventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,37 +122,19 @@ public class MainActivityHabits extends AppCompatActivity {
                 int currentIndex = group.indexOfChild(selectedChip);
 
                 // find difference in days
-                int difference = previousSelectedChip - currentIndex;
+                int difference = currentIndex - previousSelectedChip;
 
+                // Update the calendar based on the difference
                 Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_WEEK, - difference);
+                calendar.setTime(currentlyShowing);
+                calendar.add(Calendar.DATE, difference); // Add/subtract days
 
                 // Get the new date after subtracting 2 days
                 Date newDate = calendar.getTime();
+                previousSelectedChip = currentIndex;
                 update(newDate);
                 }
             });
-
-        recyclerView = findViewById(R.id.habitsView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        for (String[] habitData : habits) {
-            HabitsModel habitModel = new HabitsModel(
-                    0,
-                    habitData[0], // Name
-                    habitData[1], // Description
-                    habitData[2], // Target Goal
-                    habitData[4],  // Completed Progress
-                    habitData[3], // Units
-                    -6190938,
-                    "null"
-            );
-            habitModelList.add(habitModel);
-        }
-
-        HabitsAdapter = new HabitsAdapter(habitModelList, this);
-        recyclerView.setAdapter(HabitsAdapter);
     }
 
     public void update(Date date){
@@ -166,6 +160,32 @@ public class MainActivityHabits extends AppCompatActivity {
             Chip chipToSelect = (Chip) chipGroup.getChildAt(dayOfWeek);
             chipGroup.check(chipToSelect.getId());
         }
+
+        if (recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() > 0) {
+            // Clear the adapter's data
+            HabitsAdapter.clearData();
+        }
+
+        DBHandler db = new DBHandler(this);
+        habits = db.onLoadHabits(date);
+
+        habitModelList.clear();
+        for (String[] habitData : habits) {
+            HabitsModel habitModel = new HabitsModel(
+                    Integer.valueOf(habitData[3]),
+                    habitData[0], // Name
+                    habitData[1], // Description
+                    habitData[5], // Target Goal
+                    habitData[6],  // Completed Progress
+                    habitData[7], // Units
+                    Integer.valueOf(habitData[2]),
+                    habitData[4]
+            );
+            habitModelList.add(habitModel);
+        }
+
+        HabitsAdapter = new HabitsAdapter(habitModelList, this);
+        recyclerView.setAdapter(HabitsAdapter);
 
         //store for later use
         currentlyShowing = date;

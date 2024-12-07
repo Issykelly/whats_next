@@ -8,6 +8,24 @@
     tools:context=".MainActivityHabits">
 
     <Button
+        android:id="@+id/addButton"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="39dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="+"
+        android:textColor="#050505"
+        android:textSize="40sp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/habitsView"
+        app:strokeColor="#2E2C2C"
+        app:strokeWidth="2dp" />
+
+    <Button
         android:id="@+id/habitsButton"
         android:layout_width="188dp"
         android:layout_height="51dp"
