@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -7,10 +8,11 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:padding="2dp">
+        android:padding="2dp"
+        tools:ignore="UselessParent">
 
         <RelativeLayout
-            android:id="@+id/eventIcon"
+            android:id="@+id/habitIcon"
             android:layout_width="50dp"
             android:layout_height="55dp"
             android:background="@android:color/transparent">
@@ -22,12 +24,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:text="event name"
+            android:text="@string/placeholder"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingEnd="45dp"
+            android:paddingStart="0dp"
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/date"
@@ -35,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
-            android:text="event date"
+            android:text="@string/placeholder"
             android:textColor="#000000"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <RelativeLayout
             android:layout_width="89dp"
@@ -53,7 +56,7 @@
                 android:layout_centerHorizontal="true"
                 android:textAlignment="center"
                 android:maxLines="1"
-                android:text="00"
+                android:text="@string/placeholderNumber"
                 android:textColor="#000000"
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="10sp"
@@ -68,9 +71,9 @@
                 android:layout_below="@id/countdown"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="2dp"
-                android:text="placeholder"
+                android:text="@string/placeholder"
                 android:textColor="#000000"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

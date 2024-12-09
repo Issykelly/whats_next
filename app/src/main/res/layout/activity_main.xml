@@ -13,7 +13,7 @@
         android:layout_width="188dp"
         android:layout_height="51dp"
         android:backgroundTint="#00FFFFFF"
-        android:text="to do"
+        android:text="@string/habits"
         android:textColor="#050505"
         android:textColorLink="#FFFFFF"
         app:cornerRadius="4dp"
@@ -33,7 +33,7 @@
         android:layout_width="188dp"
         android:layout_height="51dp"
         android:backgroundTint="#2E2C2C"
-        android:text="events"
+        android:text="@string/events"
         android:textColor="#ffffff"
         app:cornerRadius="4dp"
         app:iconPadding="16dp"
@@ -69,7 +69,7 @@
                 android:id="@+id/pastEventText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Past Event Placeholder"
+                android:text="@string/placeholder"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -88,7 +88,7 @@
                 android:id="@+id/futureEventText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Future Event Placeholder"
+                android:text="@string/placeholder"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -107,7 +107,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="13dp"
         android:backgroundTint="#00FFFFFF"
-        android:text="+"
+        android:text="@string/add"
         android:textColor="#050505"
         android:textSize="40sp"
         app:cornerRadius="50dp"

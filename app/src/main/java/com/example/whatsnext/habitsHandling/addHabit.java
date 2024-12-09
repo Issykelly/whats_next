@@ -1,5 +1,6 @@
 package com.example.whatsnext.habitsHandling;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.whatsnext.MainActivity;
 import com.example.whatsnext.MainActivityHabits;
 import com.example.whatsnext.R;
+import com.example.whatsnext.countdownHandling.CountdownModel;
 import com.example.whatsnext.countdownHandling.addEvent;
 import com.example.whatsnext.database.DBHandler;
 
@@ -34,6 +36,8 @@ public class addHabit extends AppCompatActivity {
     private EditText habitName, habitDate, habitDesc, habitGoal, habitUnit;
     private int DefaultColor;
     private HabitsModel HabitsModel;
+    Date date;
+    DBHandler db = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,6 @@ public class addHabit extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        DBHandler db = new DBHandler(this);
 
         PickColorButton = findViewById(R.id.pickColourButton);
         Quit = findViewById(R.id.quitButton);
@@ -78,6 +80,42 @@ public class addHabit extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         freq.setAdapter(adapter2);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("HabitsModel")) {
+            Object extra = intent.getSerializableExtra("HabitsModel");
+            if (extra instanceof HabitsModel) {
+                HabitsModel = (HabitsModel) extra; // Properly assign HabitsModel here
+            } else {
+                date = (Date) extra;  // If it's not HabitsModel, it must be Date
+            }
+        }
+
+        if (HabitsModel != null){
+            habitName.setText(HabitsModel.getHabitName());
+            habitDate.setText(HabitsModel.getHabitDate());
+            habitGoal.setText(String.valueOf(HabitsModel.getHabitGoal()));
+            habitDesc.setText(HabitsModel.getHabitDesc());
+            habitUnit.setText(HabitsModel.getHabitUnit());
+            DefaultColor = HabitsModel.getHabitColour();
+            PickColorButton.setBackgroundColor(DefaultColor);
+            String image = HabitsModel.getHabitImage();
+            String freqency = HabitsModel.getHabitFreq();
+            int position = adapter.getPosition(image);
+            icon.setSelection(position);
+            int position2 = adapter2.getPosition(freqency);
+            freq.setSelection(position2);
+        } else {
+            habitName.setText("");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = sdf.format(date);
+            habitDate.setText(formattedDate);
+            habitGoal.setText("");
+            habitDesc.setText("");
+            habitUnit.setText("");
+            icon.setSelection(0);
+            freq.setSelection(0);
+        }
+
         PickColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +129,13 @@ public class addHabit extends AppCompatActivity {
                 HabitsModel = null;
                 Intent intent = new Intent(addHabit.this, MainActivityHabits.class);
                 startActivity(intent);
+            }
+        });
+
+        Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                openDeleteDialogue();
             }
         });
 
@@ -141,8 +186,11 @@ public class addHabit extends AppCompatActivity {
                         int goalInteger = Integer.parseInt(goal);
                         Date habitDate = sdf.parse(date);
 
-                        db.addNewHabit(name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.valueOf(goal), unit, selectedFreqOption);
-
+                        if (HabitsModel != null){
+                            db.editHabit(HabitsModel.getHabitNumber(), name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.valueOf(goal), unit, selectedFreqOption);
+                        } else {
+                            db.addNewHabit(name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.valueOf(goal), unit, selectedFreqOption);
+                        }
 
                         HabitsModel = null;
                         Intent intent = new Intent(addHabit.this, MainActivityHabits.class);
@@ -177,5 +225,39 @@ public class addHabit extends AppCompatActivity {
                     }
                 });
         colorPickerDialogue.show();
+    }
+
+    public void openDeleteDialogue(){
+        if (HabitsModel != null){
+            Dialog dialog = new Dialog(this);
+
+            dialog.setContentView(R.layout.delete_dialog);
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+            dialog.show();
+
+            Button instance = dialog.findViewById(R.id.thisInstance);
+            Button every = dialog.findViewById(R.id.every);
+
+            instance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    db.deletehabitInstance(HabitsModel.getHabitTrackingNo());
+                    Intent intent = new Intent(addHabit.this, MainActivityHabits.class);
+                    startActivity(intent);
+                }
+            });
+
+            every.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    db.deleteWholeHabit(HabitsModel.getHabitNumber());
+                    Intent intent = new Intent(addHabit.this, MainActivityHabits.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            Intent intent = new Intent(addHabit.this, MainActivityHabits.class);
+            startActivity(intent);
+        }
     }
 }

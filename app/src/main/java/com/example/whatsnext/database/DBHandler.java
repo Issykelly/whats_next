@@ -200,5 +200,35 @@ public class DBHandler extends SQLiteOpenHelper {
         habits.addNewHabit(db, habitName, habitDesc, habitDate, habitColour, image, goal, unit, freq);
         db.close();
     }
+
+    public void addHabitProgress(int progress, int goal, String ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        habits.addHabitProgress(db, progress, goal, ID);
+        db.close();
+    }
+
+    public void minusHabitProgress(int progress, String ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        habits.minusHabitProgress(db, progress, ID);
+        db.close();
+    }
+
+    public void editHabit(int id, String habitName, String habitDesc, String habitDate, String habitColour, String image, int goal, String unit, String freq){
+        SQLiteDatabase db = this.getWritableDatabase();
+        habits.editHabit(db, String.valueOf(id), habitName, habitDesc, habitDate, habitColour, image, goal, unit, freq);
+        db.close();
+    }
+
+    public void deletehabitInstance(int habitTrackingNo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        habits.deleteHabitInstance(db, String.valueOf(habitTrackingNo));
+        db.close();
+    }
+
+    public void deleteWholeHabit(int habitNo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        habits.deleteWholeHabit(db, String.valueOf(habitNo));
+        db.close();
+    }
 }
 

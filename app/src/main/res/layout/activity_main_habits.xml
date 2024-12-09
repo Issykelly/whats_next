@@ -13,7 +13,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="39dp"
         android:backgroundTint="#00FFFFFF"
-        android:text="+"
+        android:text="@string/plus"
         android:textColor="#050505"
         android:textSize="40sp"
         app:cornerRadius="50dp"
@@ -30,7 +30,7 @@
         android:layout_width="188dp"
         android:layout_height="51dp"
         android:backgroundTint="#2E2C2C"
-        android:text="to do"
+        android:text="@string/habits"
         android:textColor="#ffffff"
         app:cornerRadius="4dp"
         app:iconPadding="16dp"
@@ -49,7 +49,7 @@
         android:layout_width="188dp"
         android:layout_height="51dp"
         android:backgroundTint="#00FFFFFF"
-        android:text="events"
+        android:text="@string/events"
         android:textColor="#050505"
         android:textColorLink="#FFFFFF"
         app:cornerRadius="4dp"
@@ -65,9 +65,13 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/daysChips"
-        android:layout_width="384dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="20dp"
+        android:gravity="center"
+        android:paddingVertical="2dp"
         app:chipSpacingHorizontal="6dp"
+        app:chipSpacingVertical="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.407"
@@ -83,9 +87,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="mon"
+            android:text="@string/monday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/tuesday"
@@ -93,9 +98,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="tues"
+            android:text="@string/tuesday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/wednesday"
@@ -103,9 +109,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="wed"
+            android:text="@string/wednesday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/thursday"
@@ -113,9 +120,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="thurs"
+            android:text="@string/thursday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/friday"
@@ -123,9 +131,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="fri"
+            android:text="@string/friday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/saturday"
@@ -133,9 +142,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="sat"
+            android:text="@string/saturday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/sunday"
@@ -143,55 +153,59 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
-            android:text="sun"
+            android:text="@string/sunday"
             android:textColor="@color/chip_text"
-            android:textSize="9sp" />
+            android:gravity="center"
+            android:textSize="11sp" />
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
         android:id="@+id/prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:text="prev"
+        android:layout_marginTop="60dp"
+        android:text="@string/prev"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/currentDate"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/daysChips" />
 
     <TextView
         android:id="@+id/currentDate"
-        android:layout_width="274dp"
-        android:layout_height="22dp"
+        android:layout_width="273dp"
+        android:layout_height="34dp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="764dp"
-        android:text="date placeholder"
+        android:layout_marginBottom="716dp"
+        android:text="@string/placeholder"
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/daysChips"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.285" />
 
     <TextView
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="next"
+        android:layout_marginTop="8dp"
+        android:text="@string/next"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toEndOf="@+id/currentDate"
         app:layout_constraintTop_toBottomOf="@+id/daysChips" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habitsView"
-        android:layout_width="379dp"
-        android:layout_height="625dp"
+        android:layout_width="377dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentDate"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.125" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

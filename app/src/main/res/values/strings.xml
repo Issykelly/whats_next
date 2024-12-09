@@ -1,5 +1,42 @@
 <resources>
     <string name="app_name">whats next</string>
+    <string name="placeholder">placeholder</string>
+    <string name="placeholderNumber">00</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="edit">edit</string>
+    <string name="deleteDescription">"Would you like to delete every instance of this habit, or just this instance of this habit on this selected day?</string>
+    <string name="deleteTitle">Delete Options</string>
+    <string name="delete"> Delete </string>
+    <string name="close"> X </string>
+    <string name="eInstance">Every instance</string>
+    <string name="tInstance">This instance</string>
+    <string name="events"> Events </string>
+    <string name="habits"> To Do</string>
+    <string name="prev"> prev </string>
+    <string name="next"> next </string>
+    <string name="monday">mon</string>
+    <string name="tuesday">tues</string>
+    <string name="wednesday">wed</string>
+    <string name="thursday">thurs</string>
+    <string name="friday">fri</string>
+    <string name="saturday">sat</string>
+    <string name="sunday">sun</string>
+    <string name="editH">Edit Habit</string>
+    <string name="nameH">Habit Name</string>
+    <string name="descH">Habit Description</string>
+    <string name="startDateH"> Habit Start Date</string>
+    <string name="colourH"> Habit Display Colour</string>
+    <string name="iconH"> Habit Icon </string>
+    <string name="freqH"> Habit Frequency </string>
+    <string name="goalH"> Goal </string>
+    <string name="unitH"> Unit </string>
+    <string name="colourPicker"> Pick Colour</string>
+    <string name="editE"> Edit Event </string>
+    <string name="nameE">Event Name</string>
+    <string name="dateE">Event Date</string>
+    <string name="iconE"> Event Icon</string>
+    <string name="ColourE"> Event Colour</string>
     <string-array name="icon_array">
         <item>question</item>
         <item>mirrorball</item>

@@ -1,7 +1,6 @@
 package com.example.whatsnext.countdownHandling;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,7 +133,7 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
             EventDate = itemView.findViewById(R.id.date);
             EventCountdown = itemView.findViewById(R.id.countdown);
             EventCountdownLabel = itemView.findViewById(R.id.countdownLabel);
-            EventIcons = itemView.findViewById(R.id.eventIcon);
+            EventIcons = itemView.findViewById(R.id.habitIcon);
         }
     }
 }

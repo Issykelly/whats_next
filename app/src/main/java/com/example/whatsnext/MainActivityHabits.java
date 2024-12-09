@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whatsnext.countdownHandling.CountdownModel;
 import com.example.whatsnext.countdownHandling.addEvent;
 import com.example.whatsnext.database.DBHandler;
 import com.example.whatsnext.habitsHandling.HabitsAdapter;
@@ -100,6 +101,7 @@ public class MainActivityHabits extends AppCompatActivity {
             public void onClick(View v) {
                 // Create an Intent to start the addEvent activity
                 Intent intent = new Intent(MainActivityHabits.this, addHabit.class);
+                intent.putExtra("HabitsModel", currentlyShowing);
                 startActivity(intent);
             }
         });
@@ -175,16 +177,24 @@ public class MainActivityHabits extends AppCompatActivity {
                     Integer.valueOf(habitData[3]),
                     habitData[0], // Name
                     habitData[1], // Description
-                    habitData[5], // Target Goal
-                    habitData[6],  // Completed Progress
+                    Integer.valueOf(habitData[5]), // Target Goal
+                    Integer.valueOf(habitData[6]),  // Completed Progress
                     habitData[7], // Units
                     Integer.valueOf(habitData[2]),
-                    habitData[4]
+                    habitData[4],
+                    Integer.valueOf(habitData[10]),
+                    habitData[8],
+                    habitData[9]
             );
             habitModelList.add(habitModel);
         }
 
-        HabitsAdapter = new HabitsAdapter(habitModelList, this);
+        HabitsAdapter = new HabitsAdapter(habitModelList, this, position -> {
+            // this code is creating an onClickListener method for recycler view
+            //where you grab which event is being clicked, and send its infomation
+            // into add events
+            HabitsModel selectedModel = habitModelList.get(position);
+        });
         recyclerView.setAdapter(HabitsAdapter);
 
         //store for later use
