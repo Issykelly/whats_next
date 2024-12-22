@@ -1,6 +1,7 @@
 package com.example.whatsnext.countdownHandling;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,9 @@ import java.util.List;
 
 public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.CountdownViewHolder> {
 
-    private List<CountdownModel> countdownModelList;
+    private final List<CountdownModel> countdownModelList;
     private Context context;
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
 
     public CountdownAdapter(List<CountdownModel> countdownModelList, OnItemClickListener listener) {
         this.countdownModelList = countdownModelList;
@@ -99,14 +100,14 @@ public class CountdownAdapter extends RecyclerView.Adapter<CountdownAdapter.Coun
                 public void onCountdownFinish() {
                     // When countdown finishes, set the result to finished
                     countdownModel.setCountdown(new String[]{"Event Finished", " "});
-                    holder.EventCountdown.setText("Event Finished");
-                    holder.EventCountdownLabel.setText("Finished");
+                    holder.EventCountdown.setText(R.string.eventFinished);
+                    holder.EventCountdownLabel.setText(R.string.finishedText);
                 }
             });
         } catch (ParseException e) {
-            e.printStackTrace();
-            holder.EventCountdown.setText("Error");
-            holder.EventCountdownLabel.setText("Invalid Date");
+            Log.e("countdownAdapter", "error in countdown");
+            holder.EventCountdown.setText(R.string.errorText);
+            holder.EventCountdownLabel.setText(R.string.dateError);
         }
 
         holder.itemView.setOnClickListener(v -> listener.onItemClick(holder.getAdapterPosition()));

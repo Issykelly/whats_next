@@ -2,16 +2,18 @@ package com.example.whatsnext.countdownHandling;
 
 import android.icu.text.SimpleDateFormat;
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class CountdownTimer {
 
     public CountdownTimer(String eventDate, CountdownCallback callback) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
 
         try {
             Date event = sdf.parse(eventDate);
@@ -38,22 +40,20 @@ public class CountdownTimer {
             }
 
             // Set the correct timer duration
-            long initialDuration = timeRemaining;
 
             // Set up a unified CountDownTimer
-            new CountDownTimer(initialDuration, 1000) {
+            new CountDownTimer(timeRemaining, 1000) {
                 @Override
                 public void onTick(long millisUntilTick) {
                     // if time remaining is bigger than 0, referenceTime = millisUntilTick
                     // this is the time remianing until the event.
                     // if not, the event is in the past, and use millisUntilTick + timeElapsed
-                    long referenceTime = millisUntilTick;
 
                     // Calculate days, hours, minutes, and seconds
-                    long days = TimeUnit.MILLISECONDS.toDays(referenceTime);
-                    long hours = TimeUnit.MILLISECONDS.toHours(referenceTime) - TimeUnit.DAYS.toHours(days);
-                    long minutes = TimeUnit.MILLISECONDS.toMinutes(referenceTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(referenceTime));
-                    long seconds = TimeUnit.MILLISECONDS.toSeconds(referenceTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(referenceTime));
+                    long days = TimeUnit.MILLISECONDS.toDays(millisUntilTick);
+                    long hours = TimeUnit.MILLISECONDS.toHours(millisUntilTick) - TimeUnit.DAYS.toHours(days);
+                    long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilTick) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilTick));
+                    long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilTick) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilTick));
 
                     // Return result via callback
                     //Log.d("countdown", String.valueOf(days));
@@ -67,7 +67,7 @@ public class CountdownTimer {
             }.start();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("countdownTimer", "error in countdown Timer");
         }
     }
 

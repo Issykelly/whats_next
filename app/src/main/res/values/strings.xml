@@ -37,6 +37,19 @@
     <string name="dateE">Event Date</string>
     <string name="iconE"> Event Icon</string>
     <string name="ColourE"> Event Colour</string>
+    <string name="nameError"> Please enter a name</string>
+    <string name="nameLengthLongError"> please enter a name shorter than 20 characters </string>
+    <string name="invalidDateFormat"> Invalid date format. Please use YYYY-MM-DD </string>
+    <string name="descriptionError"> please enter a description </string>
+    <string name="decriptionLengthError"> please enter a description shorter than 35 characters </string>
+    <string name="unitError"> please enter a unit </string>
+    <string name="unitLength">please enter a unit shorter than 10 characters</string>
+    <string name="goalError">please enter a goal less than 9999</string>
+    <string name="goalFormat">Invalid goal format. Please make this a number</string>
+    <string name="eventFinished">Event Finished</string>
+    <string name="finishedText">Finished</string>
+    <string name="errorText">Error</string>
+    <string name="dateError">Invalid Date</string>
     <string-array name="icon_array">
         <item>question</item>
         <item>mirrorball</item>

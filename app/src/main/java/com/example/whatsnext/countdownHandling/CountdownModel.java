@@ -5,8 +5,11 @@ import java.io.Serializable;
 public class CountdownModel implements Serializable {
 
     private String[] countdown;  // Hold the countdown value
-    private int eventColour;
-    private String eventNo, eventImage, eventDate, eventName;
+    private final int eventColour;
+    private final String eventNo;
+    private final String eventImage;
+    private String eventDate;
+    private String eventName;
 
     // Constructor
     public CountdownModel(String eventNo, String eventName, String eventDate, String eventColour, String eventImage) {
@@ -14,7 +17,7 @@ public class CountdownModel implements Serializable {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventImage = eventImage;
-        this.eventColour = Integer.valueOf(eventColour);
+        this.eventColour = Integer.parseInt(eventColour);
         this.countdown = new String[]{"0", "seconds"}; // Default value
     }
 

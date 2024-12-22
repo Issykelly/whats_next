@@ -14,19 +14,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.whatsnext.MainActivity;
-import com.example.whatsnext.MainActivityHabits;
 import com.example.whatsnext.R;
-import com.example.whatsnext.countdownHandling.CountdownAdapter;
-import com.example.whatsnext.countdownHandling.CountdownModel;
-import com.example.whatsnext.countdownHandling.addEvent;
 import com.example.whatsnext.database.DBHandler;
 
 import java.util.List;
 
 public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitsViewHolder> {
 
-    private List<HabitsModel> habitModelList;
+    private final List<HabitsModel> habitModelList;
     private OnItemClickListener listener;
     private int selectedPosition = -1;
     DBHandler db;

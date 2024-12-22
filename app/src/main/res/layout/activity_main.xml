@@ -107,7 +107,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="13dp"
         android:backgroundTint="#00FFFFFF"
-        android:text="@string/add"
+        android:text="@string/plus"
         android:textColor="#050505"
         android:textSize="40sp"
         app:cornerRadius="50dp"

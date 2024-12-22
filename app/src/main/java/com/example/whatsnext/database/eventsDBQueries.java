@@ -4,15 +4,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class eventsDBQueries {
 
-    private static final String DB_NAME = "events";
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "myevents";
     private static final String ID_COL = "id";
@@ -87,7 +86,7 @@ public class eventsDBQueries {
     }
 
     public void checkFutureEventsPast(SQLiteDatabase db) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         Date currentDate = new Date();
 
         Cursor cursorEvents =
@@ -108,6 +107,7 @@ public class eventsDBQueries {
             } while (cursorEvents.moveToNext());
             // moving our cursor to next.
         }
+        cursorEvents.close();
     }
 
     public void addNewEvent(SQLiteDatabase db, String eventName, String eventDate, String eventColour, int inFuture, String image) {

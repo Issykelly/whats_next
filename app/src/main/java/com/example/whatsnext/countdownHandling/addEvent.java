@@ -22,12 +22,13 @@ import com.example.whatsnext.R;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class addEvent extends AppCompatActivity {
 
-    private Button PickColorButton, Quit, Add, Delete;
+    private Button PickColorButton;
     private CountdownModel countdownModel;
     private TextView Error;
     private EditText EventName, EventDate;
@@ -42,9 +43,9 @@ public class addEvent extends AppCompatActivity {
         DBHandler db = new DBHandler(this);
 
         PickColorButton = findViewById(R.id.pickColourButton);
-        Quit = findViewById(R.id.quitButton);
-        Add = findViewById(R.id.addButton);
-        Delete = findViewById(R.id.deleteButton);
+        Button quit = findViewById(R.id.quitButton);
+        Button add = findViewById(R.id.addButton);
+        Button delete = findViewById(R.id.deleteButton);
         EventName = findViewById(R.id.editEventName);
         Error = findViewById(R.id.errorMessage);
         EventDate = findViewById(R.id.editEventDate);
@@ -88,7 +89,7 @@ public class addEvent extends AppCompatActivity {
             }
         });
 
-        Quit.setOnClickListener(new View.OnClickListener() {
+        quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 countdownModel = null;
@@ -97,7 +98,7 @@ public class addEvent extends AppCompatActivity {
             }
         });
 
-        Delete.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (countdownModel != null){
@@ -109,11 +110,11 @@ public class addEvent extends AppCompatActivity {
             }
         });
 
-        Add.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // to allow us to check the date is in the right format
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
                 sdf.setLenient(false);
 
                 //get the name & date from the user
@@ -124,14 +125,14 @@ public class addEvent extends AppCompatActivity {
                 // input validation!
                 if (name.isEmpty()) {
                     // if the name is empty, show the error message
-                    // and update it as neccessary
+                    // and update it as necessary
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a name");
+                    Error.setText(getString(R.string.nameError));
                 } else if (name.length() > 20) {
                     // if the name too long, show the error message
-                    // and update it as neccessary
+                    // and update it as necessary
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a name shorter than 20 characters");
+                    Error.setText(getString(R.string.nameLengthLongError));
                 } else {
                     try {
                         // try parsing date, if no error
@@ -154,9 +155,9 @@ public class addEvent extends AppCompatActivity {
                         startActivity(intent);
                     } catch (ParseException e) {
                         // if the Date is wrong, show the error message
-                        // and update it as neccessary
+                        // and update it as necessary
                         Error.setVisibility(View.VISIBLE);
-                        Error.setText("Invalid date format. Please use YYYY-MM-DD");
+                        Error.setText(getString(R.string.invalidDateFormat));
                     }
                 }
             }
@@ -164,8 +165,6 @@ public class addEvent extends AppCompatActivity {
     }
 
     public void openColorPickerDialogue() {
-        // the AmbilWarnaDialog callback needs 3 parameters
-        // one is the context, second is default color,
         final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(this, DefaultColor,
                 new AmbilWarnaDialog.OnAmbilWarnaListener() {
                     @Override

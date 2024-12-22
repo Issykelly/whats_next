@@ -9,6 +9,7 @@ import android.icu.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_EVENTS_NAME = "events";
@@ -122,7 +123,7 @@ public class DBHandler extends SQLiteOpenHelper {
         while (!startDate.after(endDate)) {
             ContentValues tracking1 = new ContentValues();
             tracking1.put(HABITS_ID_COL, habit1Id);
-            tracking1.put(DATE_COL, new SimpleDateFormat("yyyy-MM-dd").format(startDate.getTime()));
+            tracking1.put(DATE_COL, new SimpleDateFormat("yyyy-MM-dd", Locale.UK).format(startDate.getTime()));
             tracking1.put(PROGRESS_COL, 1);
             db.insert(TABLE_HABITS_TRACKING_NAME, null, tracking1);
             startDate.add(Calendar.DATE, 1);
@@ -134,7 +135,7 @@ public class DBHandler extends SQLiteOpenHelper {
         while (!startDate.after(endDate)) {
             ContentValues tracking2 = new ContentValues();
             tracking2.put(HABITS_ID_COL, habit2Id);
-            tracking2.put(DATE_COL, new SimpleDateFormat("yyyy-MM-dd").format(startDate.getTime()));
+            tracking2.put(DATE_COL, new SimpleDateFormat("yyyy-MM-dd", Locale.UK).format(startDate.getTime()));
             tracking2.put(PROGRESS_COL, 0);
             db.insert(TABLE_HABITS_TRACKING_NAME, null, tracking2);
             startDate.add(Calendar.WEEK_OF_YEAR, 1);

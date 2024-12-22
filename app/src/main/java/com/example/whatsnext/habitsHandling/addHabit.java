@@ -17,15 +17,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.whatsnext.MainActivity;
 import com.example.whatsnext.MainActivityHabits;
 import com.example.whatsnext.R;
-import com.example.whatsnext.countdownHandling.CountdownModel;
-import com.example.whatsnext.countdownHandling.addEvent;
 import com.example.whatsnext.database.DBHandler;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -106,7 +105,7 @@ public class addHabit extends AppCompatActivity {
             freq.setSelection(position2);
         } else {
             habitName.setText("");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
             String formattedDate = sdf.format(date);
             habitDate.setText(formattedDate);
             habitGoal.setText("");
@@ -143,7 +142,7 @@ public class addHabit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // to allow us to check the date is in the right format
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
                 sdf.setLenient(false);
 
                 //get the name & date from the user
@@ -160,25 +159,28 @@ public class addHabit extends AppCompatActivity {
                     // if the name is empty, show the error message
                     // and update it as neccessary
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a name");
+                    Error.setText(getString(R.string.nameError));
                 } else if (name.length() > 20) {
                     // if the name too long, show the error message
                     // and update it as neccessary
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a name shorter than 20 characters");
+                    Error.setText(getString(R.string.nameLengthLongError));
                 } else if (desc.isEmpty()) {
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a description");
-                } else if (name.length() > 35) {
+                    Error.setText(getString(R.string.descriptionError));
+                } else if (desc.length() > 35) {
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a description shorter than 35 characters");
+                    Error.setText(getString(R.string.decriptionLengthError));
                 } else if (unit.isEmpty()) {
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a unit");
+                    Error.setText(getString(R.string.unitError));
                 } else if (unit.length() >= 10) {
                     Error.setVisibility(View.VISIBLE);
-                    Error.setText("please enter a unit shorter than 10 characters");
-                } else {
+                    Error.setText(R.string.unitLength);
+                } else if (goal.length() >= 5) {
+                    Error.setVisibility(View.VISIBLE);
+                    Error.setText(R.string.goalError);
+                } else{
                     try {
                         // try parsing date, if no error
                         // than update the database!
@@ -187,9 +189,9 @@ public class addHabit extends AppCompatActivity {
                         Date habitDate = sdf.parse(date);
 
                         if (HabitsModel != null){
-                            db.editHabit(HabitsModel.getHabitNumber(), name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.valueOf(goal), unit, selectedFreqOption);
+                            db.editHabit(HabitsModel.getHabitNumber(), name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.parseInt(goal), unit, selectedFreqOption);
                         } else {
-                            db.addNewHabit(name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.valueOf(goal), unit, selectedFreqOption);
+                            db.addNewHabit(name, desc, date, String.valueOf(DefaultColor), selectedIconOption, Integer.parseInt(goal), unit, selectedFreqOption);
                         }
 
                         HabitsModel = null;
@@ -197,12 +199,12 @@ public class addHabit extends AppCompatActivity {
                         startActivity(intent);
                     } catch (ParseException e) {
                         // if the Date is wrong, show the error message
-                        // and update it as neccessary
+                        // and update it as necessary
                         Error.setVisibility(View.VISIBLE);
-                        Error.setText("Invalid date format. Please use YYYY-MM-DD");
+                        Error.setText(getString(R.string.invalidDateFormat));
                     } catch (NumberFormatException e){
                         Error.setVisibility(View.VISIBLE);
-                        Error.setText("Invalid goal format. Please make this a number");
+                        Error.setText(R.string.goalFormat);
                     }
                 }
             }
@@ -232,7 +234,7 @@ public class addHabit extends AppCompatActivity {
             Dialog dialog = new Dialog(this);
 
             dialog.setContentView(R.layout.delete_dialog);
-            dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(R.drawable.bg_window);
             dialog.show();
 
             Button instance = dialog.findViewById(R.id.thisInstance);

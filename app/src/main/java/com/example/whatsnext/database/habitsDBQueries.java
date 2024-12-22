@@ -10,6 +10,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class habitsDBQueries {
@@ -30,7 +31,7 @@ public class habitsDBQueries {
     private static final String DATE_COL = "date";
 
     public String[][] onLoadHabits(SQLiteDatabase db, Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         String formattedDate = dateFormat.format(date);
 
         String query = "SELECT " +
@@ -50,9 +51,7 @@ public class habitsDBQueries {
                 " ON " + TABLE_HABITS_NAME + "." + HABITS_ID_COL + " = " + TABLE_HABITS_TRACKING_NAME + "." + HABITS_ID_COL +
                 " WHERE " + TABLE_HABITS_TRACKING_NAME + "." + DATE_COL + " = ?";
 
-        Cursor cursorEvents = null;
-        try {
-            cursorEvents = db.rawQuery(query, new String[]{formattedDate});
+        try (Cursor cursorEvents = db.rawQuery(query, new String[]{formattedDate})) {
 
             int rowCount = cursorEvents.getCount();
             int columnCount = cursorEvents.getColumnCount();
@@ -70,10 +69,6 @@ public class habitsDBQueries {
         } catch (SQLiteException e) {
             Log.e("onLoadHabits", "Error executing query: " + query, e);
             return new String[0][0]; // Return an empty array on failure
-        } finally {
-            if (cursorEvents != null) {
-                cursorEvents.close();
-            }
         }
     }
 
@@ -146,7 +141,7 @@ public class habitsDBQueries {
 
     public void addNewInstances(SQLiteDatabase db, String ID, String habitDate, String freq){
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         try {
             Date date = dateFormat.parse(habitDate);
 
@@ -182,11 +177,7 @@ public class habitsDBQueries {
                 for (int i = 0; i < 12; i++) {
                     calendar.add(Calendar.MONTH, 1);
                     int maxDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                    if (dayOfMonth > maxDayOfMonth) {
-                        calendar.set(Calendar.DAY_OF_MONTH, maxDayOfMonth);
-                    } else {
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    }
+                    calendar.set(Calendar.DAY_OF_MONTH, Math.min(dayOfMonth, maxDayOfMonth));
 
                     values = new ContentValues();
                     values.put(DATE_COL, dateFormat.format(calendar.getTime()));
@@ -199,5 +190,5 @@ public class habitsDBQueries {
             db.close();
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e("habitsDBQueries", "error in database queries");
         }}}
