@@ -183,6 +183,13 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String[] fetchEventNames(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] names = events.fetchEventNames(db);
+        db.close();
+        return names;
+    }
+
     //habits
     public String[][] onLoadHabits(Date date) {
         SQLiteDatabase db = this.getWritableDatabase();

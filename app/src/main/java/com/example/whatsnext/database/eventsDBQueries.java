@@ -139,4 +139,21 @@ public class eventsDBQueries {
     public void deleteEvent(SQLiteDatabase db, String eventNo){
         db.delete(TABLE_NAME, ID_COL + " = ?", new String[]{eventNo});
     }
+
+    public String[] fetchEventNames(SQLiteDatabase db) {
+        Cursor cursorEvents = db.rawQuery("SELECT " + NAME_COL + " FROM " + TABLE_NAME, null);
+        int rowCount = cursorEvents.getCount(); // to determine size of String[]
+        String[] eventNames = new String[rowCount];
+
+        if (cursorEvents.moveToFirst()) {
+            int index = 0;
+            do {
+                eventNames[index] = cursorEvents.getString(0); // Index 0 corresponds to the first column
+                index++;
+            } while (cursorEvents.moveToNext());
+        }
+        cursorEvents.close();
+
+        return eventNames;
+    }
 }

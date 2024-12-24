@@ -50,10 +50,19 @@
     <string name="finishedText">Finished</string>
     <string name="errorText">Error</string>
     <string name="dateError">Invalid Date</string>
+    <string name="eventChannelname">eventNotifications</string>
+    <string name="eventChannelDescription">notifications regarding events</string>
+    <string name="notificationE">Event Notifications</string>
     <string-array name="icon_array">
         <item>question</item>
         <item>mirrorball</item>
         <item>graduation_cap</item>
+    </string-array>
+    <string-array name="notification_array">
+        <item>none</item>
+        <item>day before</item>
+        <item>week before</item>
+        <item>month before</item>
     </string-array>
     <string-array name="freq_array">
         <item>daily</item>

@@ -186,7 +186,7 @@
         app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickColourButton"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintVertical_bias="0.131" />
 
     <Spinner
         android:id="@+id/icon_spinner"
@@ -197,6 +197,30 @@
         app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventIconText"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.095" />
+
+    <TextView
+        android:id="@+id/eventNotificationText"
+        android:layout_width="177dp"
+        android:layout_height="29dp"
+        android:text="@string/notificationE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_spinner"
+        app:layout_constraintVertical_bias="0.127" />
+
+    <Spinner
+        android:id="@+id/notifications_spinner"
+        android:layout_width="334dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventNotificationText"
+        app:layout_constraintVertical_bias="0.226" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
