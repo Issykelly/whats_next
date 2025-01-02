@@ -7,6 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityHabits">
 
+    <!-- Events Button -->
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="3dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/plus"
+        android:textColor="#050505"
+        android:textSize="40sp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/habitsView"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="#2E2C2C"
+        app:strokeWidth="2dp" />
+
     <Button
         android:id="@+id/currentButton"
         android:layout_width="240dp"
@@ -19,36 +40,17 @@
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/habitsView"
-        app:layout_constraintVertical_bias="0.0"
-        app:strokeColor="#2E2C2C"
-        app:strokeWidth="2dp" />
-
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="75dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="39dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="@string/plus"
-        android:textColor="#050505"
-        android:textSize="40sp"
-        app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.994"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/habitsView"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.909"
         app:strokeColor="#2E2C2C"
         app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/habitsButton"
-        android:layout_width="188dp"
-        android:layout_height="51dp"
+        android:layout_width="286dp"
+        android:layout_height="86dp"
         android:backgroundTint="#2E2C2C"
         android:text="@string/habits"
         android:textColor="#ffffff"
@@ -56,18 +58,17 @@
         app:iconPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.353"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.013"
+        app:layout_constraintVertical_bias="0.012"
         app:strokeColor="#2E2C2C"
         app:strokeWidth="1dp" />
 
-    <!-- Events Button -->
     <Button
         android:id="@+id/eventsButton"
-        android:layout_width="188dp"
-        android:layout_height="51dp"
+        android:layout_width="286dp"
+        android:layout_height="86dp"
         android:backgroundTint="#00FFFFFF"
         android:text="@string/events"
         android:textColor="#050505"
@@ -76,10 +77,10 @@
         app:iconPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.654"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.013"
+        app:layout_constraintVertical_bias="0.012"
         app:strokeColor="#2E2C2C"
         app:strokeWidth="1dp" />
 
@@ -87,17 +88,16 @@
         android:id="@+id/daysChips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="20dp"
         android:gravity="center"
+        android:minHeight="20dp"
         android:paddingVertical="2dp"
         app:chipSpacingHorizontal="6dp"
         app:chipSpacingVertical="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072"
+        app:layout_constraintVertical_bias="0.188"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -107,9 +107,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/monday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -118,9 +118,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/tuesday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -129,9 +129,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/wednesday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -140,9 +140,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/thursday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -151,9 +151,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/friday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -162,9 +162,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/saturday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -173,9 +173,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_background"
             android:checkable="true"
+            android:gravity="center"
             android:text="@string/sunday"
             android:textColor="@color/chip_text"
-            android:gravity="center"
             android:textSize="11sp" />
     </com.google.android.material.chip.ChipGroup>
 
@@ -183,11 +183,11 @@
         android:id="@+id/prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:text="@string/prev"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/currentDate"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.827"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/daysChips" />
 
@@ -196,36 +196,37 @@
         android:layout_width="273dp"
         android:layout_height="34dp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="716dp"
         android:text="@string/placeholder"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/daysChips"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daysChips"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintTop_toBottomOf="@+id/habitsButton"
+        app:layout_constraintVertical_bias="0.857" />
 
     <TextView
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/next"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toEndOf="@+id/currentDate"
-        app:layout_constraintTop_toBottomOf="@+id/daysChips" />
+        app:layout_constraintTop_toBottomOf="@+id/eventsButton"
+        app:layout_constraintVertical_bias="0.096" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habitsView"
-        android:layout_width="377dp"
-        android:layout_height="600dp"
+        android:layout_width="375dp"
+        android:layout_height="470dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentDate"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.481" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/background"
+        android:layout_width="571dp"
+        android:layout_height="101dp"
+        android:padding="2dp"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:id="@+id/habitIcon"
+            android:layout_width="80dp"
+            android:layout_height="76dp"
+            android:background="@android:color/transparent">
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="45dp"
+            android:text="@string/placeholder"
+            android:textColor="#000000"
+            android:textSize="38sp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/placeholder"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="121dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="420dp"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:id="@+id/countdown"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="bottom|center_horizontal"
+                android:maxLines="1"
+                android:text="@string/placeholderNumber"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/countdownLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/countdown"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="@string/placeholder"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

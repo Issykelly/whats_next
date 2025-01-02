@@ -53,6 +53,7 @@
     <string name="eventChannelname">eventNotifications</string>
     <string name="eventChannelDescription">notifications regarding events</string>
     <string name="notificationE">Event Notifications</string>
+    <string name="current_date">current date</string>
     <string-array name="icon_array">
         <item>question</item>
         <item>mirrorball</item>

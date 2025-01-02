@@ -91,6 +91,7 @@ public class MainActivityHabits extends AppCompatActivity {
         });
 
         Button addButton = findViewById(R.id.addButton);
+        Button currentDate = findViewById(R.id.currentButton);
         // Set an OnClickListener on the button
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,14 @@ public class MainActivityHabits extends AppCompatActivity {
                 Intent intent = new Intent(MainActivityHabits.this, addHabit.class);
                 intent.putExtra("HabitsModel", currentlyShowing);
                 startActivity(intent);
+            }
+        });
+
+        currentDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isUserInteracting = false;
+                update(today);
             }
         });
 
@@ -116,21 +125,23 @@ public class MainActivityHabits extends AppCompatActivity {
             @Override
             public void onCheckedChanged (ChipGroup group,int checkedId){
                 // Get the index of the currently selected chip
-                Chip selectedChip = findViewById(checkedId);
-                int currentIndex = group.indexOfChild(selectedChip);
+                if (isUserInteracting){
+                    Chip selectedChip = findViewById(checkedId);
+                    int currentIndex = group.indexOfChild(selectedChip);
 
-                // find difference in days
-                int difference = currentIndex - previousSelectedChip;
+                    // find difference in days
+                    int difference = currentIndex - previousSelectedChip;
 
-                // Update the calendar based on the difference
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentlyShowing);
-                calendar.add(Calendar.DATE, difference); // Add/subtract days
+                    // Update the calendar based on the difference
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(currentlyShowing);
+                    calendar.add(Calendar.DATE, difference); // Add/subtract days
 
-                // Get the new date after subtracting 2 days
-                Date newDate = calendar.getTime();
-                previousSelectedChip = currentIndex;
-                update(newDate);
+                    // Get the new date after subtracting 2 days
+                    Date newDate = calendar.getTime();
+                    previousSelectedChip = currentIndex;
+                    update(newDate);
+                }
                 }
             });
     }

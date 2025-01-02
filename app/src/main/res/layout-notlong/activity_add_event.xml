@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".countdownHandling.addEvent">
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/plus"
+        android:textColor="#050505"
+        android:textSize="40sp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="#2E2C2C"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="192dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/delete"
+        android:textColor="#050505"
+        android:textSize="40sp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="#2E2C2C"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/close"
+        android:textColor="#050505"
+        android:textSize="40sp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="#2E2C2C"
+        app:strokeWidth="2dp" />
+
+    <TextView
+        android:id="@+id/addEventTitle"
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:text="@string/editE"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/eventName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372" />
+
+    <TextView
+        android:id="@+id/colourText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/ColourE"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEventDate" />
+
+    <TextView
+        android:id="@+id/eventDate"
+        android:layout_width="135dp"
+        android:layout_height="25dp"
+        android:text="@string/dateE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editEventDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEventName"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/eventNotificationText"
+        android:layout_width="177dp"
+        android:layout_height="29dp"
+        android:text="@string/notificationE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.332"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_spinner"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <Spinner
+        android:id="@+id/icon_spinner"
+        android:layout_width="458dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventIconText"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <TextView
+        android:id="@+id/eventIconText"
+        android:layout_width="177dp"
+        android:layout_height="29dp"
+        android:text="@string/iconH"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.338"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickColourButton"
+        app:layout_constraintVertical_bias="0.073" />
+
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nameE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editEventName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editEventName"
+        android:layout_width="471dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:labelFor="@id/eventName"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.157"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/editEventDate"
+        android:layout_width="465dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:inputType="date"
+        android:labelFor="@id/eventDate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEventName"
+        app:layout_constraintVertical_bias="0.112"
+        tools:ignore="Autofill,LabelFor" />
+
+    <Button
+        android:id="@+id/pickColourButton"
+        android:layout_width="452dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#A188A6"
+        android:text="@string/colourPicker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colourText"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="492dp"
+        android:layout_height="125dp"
+        android:text=""
+        android:textColor="#C12C2C"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickColourButton"
+        app:layout_constraintVertical_bias="0.632" />
+
+    <Spinner
+        android:id="@+id/notifications_spinner"
+        android:layout_width="460dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventNotificationText"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

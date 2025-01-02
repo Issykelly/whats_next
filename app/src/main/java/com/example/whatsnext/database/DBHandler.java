@@ -101,7 +101,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values3.put(GOAL_COL, 2);
         values3.put(UNIT_COL, "times");
         values3.put(FREQ_COL, "daily");
-        values3.put(INITIAL_DATE_COL, "2024-07-29");
+        values3.put(INITIAL_DATE_COL, "2025-01-01");
         long habit1Id = db.insert(TABLE_HABITS_NAME, null, values3);
 
         ContentValues values4 = new ContentValues();
@@ -112,7 +112,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values4.put(GOAL_COL, 30);
         values4.put(UNIT_COL, "minutes");
         values4.put(FREQ_COL, "weekly");
-        values4.put(INITIAL_DATE_COL, "2024-10-19");
+        values4.put(INITIAL_DATE_COL, "2024-12-19");
         long habit2Id = db.insert(TABLE_HABITS_NAME, null, values4);
 
         Calendar startDate = Calendar.getInstance();
@@ -148,6 +148,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // avoid any errors!
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_TRACKING_NAME);
         onCreate(db);
     }
 
@@ -155,10 +156,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public ArrayList<String[][]> onLoadEvents() {
         SQLiteDatabase db = this.getWritableDatabase();
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_TRACKING_NAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_NAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS_NAME);
-        //onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_TRACKING_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABITS_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS_NAME);
+        onCreate(db);
 
         ArrayList<String[][]> eventsList = events.onLoadEvents(db);
         db.close();
